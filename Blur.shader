@@ -34,17 +34,16 @@
                     float4 uvgrab : TEXCOORD0;
                 };
 
-                v2f vert (appdata_t v) {
-                    v2f o;
-                    o.vertex = UnityObjectToClipPos(v.vertex);
-
+                v2f vert(appdata_t v) {
                     #if UNITY_UV_STARTS_AT_TOP
                     float scale = -1.0;
                     #else
                     float scale = 1.0;
                     #endif
 
-                    o.uvgrab.xy = (float2(o.vertex.x, o.vertex.y*scale) + o.vertex.w) * 0.5;
+		    v2f o;
+                    o.vertex = UnityObjectToClipPos(v.vertex);
+                    o.uvgrab.xy = (float2(o.vertex.x, o.vertex.y * scale) + o.vertex.w) * 0.5;
                     o.uvgrab.zw = o.vertex.zw;
 
                     return o;
@@ -95,7 +94,7 @@
                     float4 vertex : POSITION;
                     float4 uvgrab : TEXCOORD0;
                 };
-             
+
                 v2f vert(appdata_t v) {
                     #if UNITY_UV_STARTS_AT_TOP
                     const float scale = -1.0;
@@ -188,7 +187,7 @@
 
                 half4 frag(v2f i) : COLOR {
                     // Calculate perturbed coordinates
-                    const half2 bump = UnpackNormal(tex2D(_BumpMap, i.uvbump)).rg; // We could optimize this by just reading the x y without reconstructing the Z
+                    const half2 bump = UnpackNormal(tex2D(_BumpMap, i.uvbump)).rg;
                     const float2 offset = bump * _BumpAmt * _GrabTexture_TexelSize.xy;
                     i.uvgrab.xy = offset * i.uvgrab.z + i.uvgrab.xy;
 
