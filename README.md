@@ -1,2 +1,2 @@
 # Blur
-Blur shader for Unity.
+![Blur](blur.gif)
