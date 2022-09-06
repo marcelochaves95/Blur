@@ -116,7 +116,7 @@
                 float _Size;
 
                 half4 frag(v2f i) : COLOR {
-                    #define GRABPIXEL(weight,kernely) tex2Dproj(_GrabTexture, UNITY_PROJ_COORD(float4(i.uvgrab.x, i.uvgrab.y + _GrabTexture_TexelSize.y * kernely * _Size, i.uvgrab.z, i.uvgrab.w))) * weight
+                    #define GRABPIXEL(weight, kernely) tex2Dproj(_GrabTexture, UNITY_PROJ_COORD(float4(i.uvgrab.x, i.uvgrab.y + _GrabTexture_TexelSize.y * kernely * _Size, i.uvgrab.z, i.uvgrab.w))) * weight
 
                     half4 sum = half4(0, 0, 0, 0);
                     sum += GRABPIXEL(0.05, -4.0);
